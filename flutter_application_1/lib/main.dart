@@ -48,8 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter--;
     });
   }
- 
-  
+  void _incrementCounterReset() {
+    setState(() {
+    
+      _counter=0;
+    });
+  }
   @override
   Widget build(BuildContext context) {
   
@@ -95,7 +99,10 @@ borderRadius: BorderRadius.circular(12), // <— Radius
 ),
 child: const Icon(Icons.remove),
 ),
-          ],),
+          ],),TextButton(
+        onPressed: _incrementCounterReset,
+        child: const Text('Сбросить'),
+      ),
           ],
         ),
         
