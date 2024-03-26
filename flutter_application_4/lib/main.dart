@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() {
   runApp(const MyApp());
@@ -47,51 +50,77 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Column(
-            children: [
-              const Icon(
-                Icons.phone,
-                color: Colors.green,
-              ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                child: const Text(
-                  'Позвонить',
-                  style: TextStyle(color: Colors.green),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              const Icon(
-                Icons.near_me,
-                color: Colors.green,
-              ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                child: const Text(
-                  'Маршрут',
-                  style: TextStyle(color: Colors.green),
-                ),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              const Icon(
-                Icons.share,
-                color: Colors.green,
-              ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                child: const Text(
-                  'Поделиться',
-                  style: TextStyle(color: Colors.green),
-                ),
-              )
-            ],
-          )
+          GestureDetector(
+              onTap: () async {
+                final call = Uri.parse('tel:+78612215818');
+                if (await canLaunchUrl(call)) {
+                  launchUrl(call);
+                } else {
+                  throw 'Could not launch $call';
+                }
+              },
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.phone,
+                    color: Colors.green,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    child: const Text(
+                      'Позвонить',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ),
+                ],
+              )),
+          GestureDetector(
+              onTap: () async {
+                final Uri url = Uri.parse(
+                    'https://2gis.ru/krasnodar/firm/70000001031988018');
+                if (await canLaunchUrl(url)) {
+                  launchUrl(url);
+                } else {
+                  throw 'Could not launch url';
+                }
+              },
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.near_me,
+                    color: Colors.green,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    child: const Text(
+                      'Маршрут',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  )
+                ],
+              )),
+          GestureDetector(
+              onTap: () async {
+                if (!kIsWeb) {
+                  await Share.share(
+                      'https://2gis.ru/krasnodar/firm/70000001031988018');
+                }
+              },
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.share,
+                    color: Colors.green,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    child: const Text(
+                      'Поделиться',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  )
+                ],
+              ))
         ],
       ),
     );
