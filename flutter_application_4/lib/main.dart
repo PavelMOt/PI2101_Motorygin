@@ -99,30 +99,34 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildAdress() {
     return Container(
+        padding: const EdgeInsets.all(25),
         child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Общежитие № 20'),
-            Text('Краснодар, ул. Калинина, 13')
+            const Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Общежитие № 20',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('Краснодар, ул. Калинина, 13')
+              ],
+            ),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: _incrementCounterAdd,
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    )),
+                Text('$_counter')
+              ],
+            )
           ],
-        ),
-        Row(
-          children: [
-            IconButton(
-                onPressed: _incrementCounterAdd,
-                icon: Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                )),
-            Text('$_counter')
-          ],
-        )
-      ],
-    ));
+        ));
   }
 
   @override
@@ -132,6 +136,32 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
         ),
-        body: _buildAdress());
+        body: ListView(
+          children: [
+            Image.network(
+                'https://sun1-86.userapi.com/s/v1/if2/qBOUh8oyPtH2AqfnpVOddXGg0i6QG4dijCvMuWLR7w-cjRIhmQR34mgDJ9_JAjtSCkeCEFcAAb4QjmyxBrry6Yyg.jpg?size=761x761&quality=96&crop=286,118,761,761&ava=1'),
+            _buildAdress(),
+            _buildContats(),
+            Container(
+                padding: EdgeInsets.all(25),
+                child: const Text(
+                  """Студенческий городок или так называемый кампус Кубанского ГАУ состоит
+из двадцати общежитий, в которых проживает более 8000 студентов, что состав-
+ляет 96% от всех нуждающихся. Студенты первого курса обеспечены местами в об-
+щежитии полностью. В соответствии с Положением о студенческих общежитиях
+университета, при поселении между администрацией и студентами заключается
+договор найма жилого помещения. Воспитательная работа в общежитиях направ-
+лена на улучшение быта, соблюдение правил внутреннего распорядка, отсутствия
+асоциальных явлений в молодежной среде. Условия проживания в общежитиях
+университетского кампуса полностью отвечают санитарным нормам и требова-
+ниям: наличие оборудованных кухонь, душевых комнат, прачечных, читальных за-
+лов, комнат самоподготовки, помещений для заседаний студенческих советов и
+наглядной агитации. С целью улучшения условий быта студентов активно работает
+система студенческого самоуправления - студенческие советы организуют всю ра-
+боту по самообслуживанию.""",
+                  textAlign: TextAlign.justify,
+                ))
+          ],
+        ));
   }
 }
