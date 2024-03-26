@@ -23,6 +23,13 @@ class MyCalulateAreaState extends State<MyCalulateArea> {
                     padding: EdgeInsets.all(10.0),
                     child: TextFormField(validator: (value) {
                       if (value!.isEmpty) return 'Задайте Ширину';
+
+                      try {
+                        _width = int.parse(value);
+                      } catch (e) {
+                        _width = null;
+                        return e.toString();
+                      }
                     }))),
           ]),
           SizedBox(height: 10.0),
@@ -34,11 +41,25 @@ class MyCalulateAreaState extends State<MyCalulateArea> {
                     padding: EdgeInsets.all(10.0),
                     child: TextFormField(validator: (value) {
                       if (value!.isEmpty) return 'Задайте Высоту';
+
+                      try {
+                        _height = int.parse(value);
+                      } catch (e) {
+                        _height = null;
+                        return e.toString();
+                      }
                     }))),
           ]),
           SizedBox(height: 10.0),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  setState(() {
+                    if (_width is int && _height is int)
+                      _area = _width! * _height!;
+                  });
+                }
+              },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
               ),
