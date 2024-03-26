@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 final contacts = Container(
+  padding: const EdgeInsets.all(4),
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
       Column(
         children: [
-          Icon(
+          const Icon(
             Icons.phone,
             color: Colors.green,
           ),
           Container(
-            child: Text(
+            padding: const EdgeInsets.all(4),
+            child: const Text(
               'Позвонить',
               style: TextStyle(color: Colors.green),
             ),
@@ -20,12 +22,13 @@ final contacts = Container(
       ),
       Column(
         children: [
-          Icon(
+          const Icon(
             Icons.near_me,
             color: Colors.green,
           ),
           Container(
-            child: Text(
+            padding: const EdgeInsets.all(4),
+            child: const Text(
               'Маршрут',
               style: TextStyle(color: Colors.green),
             ),
@@ -34,12 +37,13 @@ final contacts = Container(
       ),
       Column(
         children: [
-          Icon(
+          const Icon(
             Icons.share,
             color: Colors.green,
           ),
           Container(
-            child: Text(
+            padding: const EdgeInsets.all(4),
+            child: const Text(
               'Поделиться',
               style: TextStyle(color: Colors.green),
             ),
